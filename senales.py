@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+#este es un comentario
 def Suma (serie, factor):
     ser = np.array(serie)
     sum = ser + factor
