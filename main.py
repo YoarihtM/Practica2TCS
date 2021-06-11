@@ -3,6 +3,7 @@ import tkinter.filedialog
 from PIL import Image,ImageTk
 from scipy.io import wavfile
 
+
 class GUI:
     def color(self):
         if self.color_base == '#24264F':
