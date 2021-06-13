@@ -1,13 +1,35 @@
 import numpy as np
 import matplotlib.pyplot as plt
 #este es un comentario
-def Suma (serie, factor):
-    ser = np.array(serie)
-    sum = ser + factor
+def Suma (serie1, serie2):
+    ser1 = np.array(serie1)
+    ser2 = np.array(serie2)
+    a = len(ser1)
+    b = len(ser2)
+    if a>b:
+        c = a-b
+        for i in range (0,c):
+            ser2 = np.append(ser2, 0)
+    elif a<b: 
+        c = b-a
+        for i in range (0,c):
+            ser1 = np.append(ser1, 0)
+    sum = ser1 + ser2
     return sum
-def Resta (serie, factor):
-    ser = np.array(serie)
-    sum = ser - factor
+def Resta (serie1, serie2):
+    ser1 = np.array(serie1)
+    ser2 = np.array(serie2)
+    a = len(ser1)
+    b = len(ser2)
+    if a>b:
+        c = a-b
+        for i in range (0,c):
+            ser2 = np.append(ser2, 0)
+    elif a<b: 
+        c = b-a
+        for i in range (0,c):
+            ser1 = np.append(ser1, 0)
+    sum = ser1 - ser2
     return sum
 def Desplazamiento(serie, k, t):
     serie = np.sin(t)
@@ -42,10 +64,12 @@ def Interpolacion(serie,k):
         aux = np.append(aux, new)
         aux = np.append(aux, ser[i+1])
     return aux
-z=[1,2,1,2,1,2]
-print("Original",z)
-print("La suma es",Suma(z,2))
-print("La Resta es",Resta(z,2))
+y=[1,2,3,4,5,6]
+z=[1,2,1,2]
+print("Original",y)
+print("Original",z, "principal")
+print("La suma es",Suma(z,y))
+print("La Resta es",Resta(z,y))
 print("La Amplificacion es",Amplifica(z,2))
 print("La atenuacion es",Atenua(z,2))
 print("La Diezmacion es",Diezmacion(z,2))
