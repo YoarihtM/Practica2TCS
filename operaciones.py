@@ -1,10 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
 #este es un comentario
-def Suma (serie, factor):
-    ser = np.array(serie)
-    sum = ser + factor
-    return sum
+def Suma (serie1, p1, serie2, p2):
+    
+    len_total_s1 = len(serie1)
+    len_total_s2 = len(serie2)
+    len_inter_s1 = len(serie1[:p1])
+    len_inter_s2 = len(serie2[p2:])
+    
+    print('tamaño de serie1 hasta su interseccion: ', len_inter_s1)
+    print('tamaño de serie2 hasta su interseccion: ', len_inter_s2)
+    
+    tam_total = len_inter_s1 + len_inter_s2
+    
+    print('tamaño de la nueva serie: ', tam_total)
+        
+    
+
 def Resta (serie, factor):
     ser = np.array(serie)
     sum = ser - factor
@@ -43,8 +55,9 @@ def Interpolacion(serie,k):
         aux = np.append(aux, ser[i+1])
     return aux
 z=[1,2,1,2,1,2]
+z1 = [1,2,3,0,3]
 print("Original",z)
-print("La suma es",Suma(z,2))
+print("La suma es: ",Suma(z,2,z1,1))
 print("La Resta es",Resta(z,2))
 print("La Amplificacion es",Amplifica(z,2))
 print("La atenuacion es",Atenua(z,2))
