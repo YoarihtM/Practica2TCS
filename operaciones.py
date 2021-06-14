@@ -3,21 +3,22 @@ from scipy import signal
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
 #este es un comentario
-def Suma (serie, factor):
-    ser1 = np.array(serie1)
-    ser2 = np.array(serie2)
-    a = len(ser1)
-    b = len(ser2)
-    if a>b:
-        c = a-b
-        for i in range (0,c):
-            ser2 = np.append(ser2, 0)
-    elif a<b: 
-        c = b-a
-        for i in range (0,c):
-            ser1 = np.append(ser1, 0)
-    sum = ser1 + ser2
-    return sum
+def Suma (serie1, p1, serie2, p2):
+    
+    len_total_s1 = len(serie1)
+    len_total_s2 = len(serie2)
+    len_inter_s1 = len(serie1[:p1])
+    len_inter_s2 = len(serie2[p2:])
+    
+    print('tamaño de serie1 hasta su interseccion: ', len_inter_s1)
+    print('tamaño de serie2 hasta su interseccion: ', len_inter_s2)
+    
+    tam_total = len_inter_s1 + len_inter_s2
+    
+    print('tamaño de la nueva serie: ', tam_total)
+        
+    
+
 def Resta (serie, factor):
     ser1 = np.array(serie1)
     ser2 = np.array(serie2)

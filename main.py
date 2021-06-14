@@ -2,6 +2,12 @@ from tkinter import *
 import tkinter.filedialog
 from PIL import Image,ImageTk
 from scipy.io import wavfile
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.figure import Figure
+import pyaudio
+import wave
+import threading
 
 class GUI:
     def color(self):
@@ -89,13 +95,33 @@ class GUI:
             self.btnResta.config(bg=self.color_base)
             self.btnSuma.config(bg=self.color_base)
     
+    def reproducirAudio(self):
+        chunk = 1024
+        audio = wave.open(self.ruta_archivo, 'rb')
+        p = pyaudio.PyAudio()
+        stream = p.open(format = p.get_format_from_width(audio.getsampwidth()),
+                        channels = audio.getnchannels(),
+                        rate = audio.getframerate(),
+                        output = True)
+        datos = audio.readframes(chunk)
+        while datos:
+            stream.write(datos)
+            datos = audio.readframes(chunk)
+    
     def abrirArchivo(self):
+        reproduccion = threading.Thread(target=self.reproducirAudio)
         self.ruta_archivo = tkinter.filedialog.askopenfilename()
         print('Ruta del archivo ', self.ruta_archivo)
         samplerate, data = wavfile.read(self.ruta_archivo)
         print(data)
-        print(len(data))
-    
+        print(samplerate)
+        grafico = plt.Figure(figsize=(6,6), dpi=100)
+        grafico.add_subplot(111).plot(data)
+        reproduccion.start()
+        self.canvas_grafica = FigureCanvasTkAgg(grafico, self.frame3)
+        self.canvas_grafica.get_tk_widget().pack(side=RIGHT, fill=BOTH)
+        self.canvas_grafica.draw()
+            
     def __init__(self):
         self.color_base = '#24264F'
         self.color_fuente = '#FFFFFF'
