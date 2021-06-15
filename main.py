@@ -13,24 +13,66 @@ from scipy import signal
 from scipy.interpolate import interp1d
 
 class GUI:
+    def updtGrafica(self, data):
+        grafico = plt.Figure(figsize=(6,6), dpi=100)
+        grafico.add_subplot(111).plot(data)
+        self.canvas_grafica = FigureCanvasTkAgg(grafico, self.frame3)
+        self.canvas_grafica.get_tk_widget().pack(side=RIGHT, fill=BOTH)
+        self.canvas_grafica.draw()
+        
     def reflexion(self, serie):
         res = serie[::-1]
         return res
 
     def Diezmacion(self, serie, k):
-        np.asarray(serie)
-        res = serie[:-k:k]
-        return res
-
-    def Interpolacion(self, serie,tipo):
-        y = np.arange(0,len(serie))
-        res = interp1d(serie, y)
+        l_serie1 = serie.split(', ')
+        print(l_serie1)
+        num_serie1 = []
+        
+        for valor in l_serie1:
+            num_serie1.append(float(valor))
+        
+        np.asarray(num_serie1)
+        res = num_serie1[:-k:k]
         print(res)
-        return res
+        plt.plot(res, res)
+        plt.show()
+        # self.updtGrafica(res)
+
+    def Interpolacion(self, serie, tipo):
+        l_serie1 = serie.split(', ')
+        print(l_serie1)
+        num_serie1 = []
+        
+        for valor in l_serie1:
+            num_serie1.append(float(valor))
+        
+        y = np.arange(0,len(serie))
+        res = interp1d(num_serie1, y, kind = tipo)
+        print(res)
+        self.updtGrafica(res)
 
     def convolucion(self, serie1, serie2):
-        res = np.convolve(serie1,serie2,mode="same")
-        return res
+        l_serie1 = serie1.split(', ')
+        l_serie2 = serie2.split(', ')
+        print(l_serie1)
+        print(l_serie2)
+        
+        num_serie1 = []
+        num_serie2 = []
+        
+        for valor in l_serie1:
+            num_serie1.append(float(valor))
+            
+        for valor in l_serie2:
+            num_serie2.append(float(valor))
+        
+        print(num_serie1)
+        print(num_serie2)
+        res = np.convolve(num_serie1,num_serie2,mode="same")
+        
+        print(res)
+        self.updtGrafica(res)
     
     def color(self):
         if self.color_base == '#24264F':
@@ -137,12 +179,8 @@ class GUI:
         samplerate, data = wavfile.read(self.ruta_archivo)
         print(data)
         print(samplerate)
-        grafico = plt.Figure(figsize=(6,6), dpi=100)
-        grafico.add_subplot(111).plot(data)
         reproduccion.start()
-        self.canvas_grafica = FigureCanvasTkAgg(grafico, self.frame3)
-        self.canvas_grafica.get_tk_widget().pack(side=RIGHT, fill=BOTH)
-        self.canvas_grafica.draw()
+        self.updtGrafica(data)
             
     def __init__(self):
         self.color_base = '#24264F'
@@ -246,7 +284,7 @@ class GUI:
         self.img6 = Image.open('./math_2/png/050-graphic.png')
         self.img6 = self.img6.resize((50,50), Image.ANTIALIAS)
         self.img6 = ImageTk.PhotoImage(self.img6)
-        self.btnDiez = Button(self.frame2, image=self.img6, text='diezmacion', bg=self.color_base)
+        self.btnDiez = Button(self.frame2, image=self.img6, text='diezmacion', bg=self.color_base, command = lambda: self.Diezmacion(self.serie1.get(), int(self.serie2.get())))
         self.btnDiez.place(x=10,y=240)
         self.lblDiez = Label(self.frame2, text='Diezmación', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
         self.lblDiez.place(x=0,y=298)
@@ -254,7 +292,7 @@ class GUI:
         self.img7 = Image.open('./math_2/png/049-graphic.png')
         self.img7 = self.img7.resize((50,50), Image.ANTIALIAS)
         self.img7 = ImageTk.PhotoImage(self.img7)
-        self.btnInter = Button(self.frame2, image=self.img7, text='interpolacion', bg=self.color_base)
+        self.btnInter = Button(self.frame2, image=self.img7, text='interpolacion', bg=self.color_base, command = lambda: self.Interpolacion(self.serie1.get(), self.serie2.get()))
         self.btnInter.place(x=110,y=240)
         self.lblInter = Label(self.frame2, text='Interpolación', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
         self.lblInter.place(x=95,y=298)
@@ -262,7 +300,7 @@ class GUI:
         self.img8 = Image.open('./math_2/png/002-cosine.png')
         self.img8 = self.img8.resize((50,50), Image.ANTIALIAS)
         self.img8 = ImageTk.PhotoImage(self.img8)
-        self.btnConv = Button(self.frame2, image=self.img8, text='convolucion', bg=self.color_base)
+        self.btnConv = Button(self.frame2, image=self.img8, text='convolucion', bg=self.color_base, command = lambda: self.convolucion(self.serie1.get(), self.serie2.get()))
         self.btnConv.place(x=210,y=240)
         self.lblConv = Label(self.frame2, text='Convolución', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
         self.lblConv.place(x=196,y=298)

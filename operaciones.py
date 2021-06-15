@@ -80,6 +80,7 @@ print("El reflejo de x es ", reflexion(x))
 print("La Diezmacion es",Diezmacion(x,2))
 print("La interpolacion es", Interpolacion(x,"linear"))
 print("La convolucion es ", convolucion(x,h))
+plt.plot(convolucion(x,h))
 # INGRESO - tiempo [a,b)
 a = -8
 b = 8
