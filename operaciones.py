@@ -40,15 +40,6 @@ def Desplazamiento(serie, k):
     return serie
 
 def Amplifica(serie, factor):
-<<<<<<< HEAD
-    expande = np.dot(serie, factor)
-    return expande
-
-def Atenua(serie, factor):
-    comprime = np.dot(serie, 1/factor)
-    return comprime
-
-=======
     for s in serie:
         s = s*factor
     return serie
@@ -56,7 +47,6 @@ def Atenua(serie, factor):
     for s in serie:
         s = s*(1/factor)
     return serie
->>>>>>> f8f701718e6219da2adee55ecdb058529cacee91
 def reflexion(serie):
     res = serie[::-1]
     return res
