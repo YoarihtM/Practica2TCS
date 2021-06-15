@@ -43,10 +43,12 @@ def Amplifica(serie, factor):
     for s in serie:
         s = s*factor
     return serie
+
 def Atenua(serie, factor):
     for s in serie:
         s = s*(1/factor)
     return serie
+
 def reflexion(serie):
     res = serie[::-1]
     return res
@@ -56,11 +58,31 @@ def Diezmacion(serie, k):
     res = serie[:-k:k]
     return res
 
-def Interpolacion(serie,tipo):
-    y = np.arange(0,len(serie))
-    res = interp1d(serie, y, kind = tipo)
-    
-    return res
+def Interpolacion(serie,factor,tipo):
+    res = []
+    if(tipo == "linear"):
+        for x in range(0,len(serie)-1):
+            suma = abs((abs(serie[x]) - abs(serie[x+1])) / factor) 
+            print("La suma es ", suma)
+            acumulador = suma
+            res.append(serie[x])
+            for y in range(0,factor):
+                res.append(round((serie[x] + acumulador),1))
+                acumulador += suma
+    elif(tipo == "escalon"):
+        for x in range(0,len(serie)-1):
+            res.append(serie[x])
+            for y in range(0,factor):
+                res.append(serie[x])
+        res.append(serie[len(serie)-1])
+    elif(tipo == "zeros"):
+        for x in range(0,len(serie)-1):
+            res.append(serie[x])
+            for y in range(0,factor):
+                res.append(0)
+        res.append(serie[len(serie)-1])
+        
+    return np.asarray(res)
 
 def convolucion(serie1, serie2):
     res = np.convolve(serie1,serie2,mode="same")
@@ -73,14 +95,20 @@ h = [0.25, 4, 3, 1, 0, 2]
 print("Original",x)
 #print("La suma es",Suma(z,2)) #Falta
 #print("La Resta es",Resta(z,2)) #Falta
-print("El desplazamiento es", Desplazamiento(x, -3))
-print("El reflejo de x es ", reflexion(x))
+#print("El desplazamiento es", Desplazamiento(x, -3))
+#print("El reflejo de x es ", reflexion(x))
 # print("La Amplificacion es",Amplifica(x,2)) #Falta
 # print("La atenuacion es",Atenua(x,2)) #Son los que faltan
+<<<<<<< Updated upstream
 print("La Diezmacion es",Diezmacion(x,2))
 print("La interpolacion es", Interpolacion(x,"linear"))
 print("La convolucion es ", convolucion(x,h))
 plt.plot(convolucion(x,h))
+=======
+#print("La Diezmacion es",Diezmacion(x,2))
+#print("La interpolacion es ",Interpolacion(x,10,"zeros"))
+#print("La convolucion es ", convolucion(x,h))
+>>>>>>> Stashed changes
 # INGRESO - tiempo [a,b)
 a = -8
 b = 8
