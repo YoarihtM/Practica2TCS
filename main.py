@@ -269,13 +269,23 @@ class GUI:
         
         self.lblSerie1 = Label(self.frame2, text='Serie 1', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
         self.lblSerie1.place(x=0,y=340)
-        self.serie1 = Entry(self.frame2, width = 20)
+        self.serie1 = Entry(self.frame2, width = 30)
         self.serie1.place(x=60,y=340)
         
         self.lblSerie2 = Label(self.frame2, text='Serie 2', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblSerie2.place(x=0,y=360)
-        self.serie2lblSerie2 = Entry(self.frame2, width = 20)
-        self.serie2lblSerie2.place(x=60,y=360)
+        self.lblSerie2.place(x=0,y=370)
+        self.serie2 = Entry(self.frame2, width = 30)
+        self.serie2.place(x=60,y=370)
+        
+        self.lblOrigen1 = Label(self.frame2, text='Origen 1', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
+        self.lblOrigen1.place(x=0,y=400)
+        self.origen1lblOrigen1 = Entry(self.frame2, width = 10)
+        self.origen1lblOrigen1.place(x=60,y=400)
+        
+        self.lblOrigen2 = Label(self.frame2, text='Origen 2', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
+        self.lblOrigen2.place(x=120,y=400)
+        self.origen2 = Entry(self.frame2, width = 10)
+        self.origen2.place(x=180,y=400)
         
         ###################### TERCER FRAME ######################
         self.frame3 = Frame(bd=10, width='600', height='450', bg=self.color_base)
