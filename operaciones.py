@@ -56,8 +56,8 @@ def Diezmacion(serie, k):
     return res
 def Interpolacion(serie,tipo):
     y = np.arange(0,len(serie))
-    res = interp1d(serie, y)
-    print(res)
+    res = interp1d(serie, y, kind = tipo)
+     
     return res
 def convolucion(serie1, serie2):
     res = np.convolve(serie1,serie2,mode="same")
