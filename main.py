@@ -8,8 +8,30 @@ from matplotlib.figure import Figure
 import pyaudio
 import wave
 import threading
+import numpy as np
+from scipy import signal
+from scipy.interpolate import interp1d
 
 class GUI:
+    def reflexion(self, serie):
+        res = serie[::-1]
+        return res
+
+    def Diezmacion(self, serie, k):
+        np.asarray(serie)
+        res = serie[:-k:k]
+        return res
+
+    def Interpolacion(self, serie,tipo):
+        y = np.arange(0,len(serie))
+        res = interp1d(serie, y)
+        print(res)
+        return res
+
+    def convolucion(self, serie1, serie2):
+        res = np.convolve(serie1,serie2,mode="same")
+        return res
+    
     def color(self):
         if self.color_base == '#24264F':
             self.color_base = '#FFFFFF'
@@ -170,80 +192,90 @@ class GUI:
         ###################### SEGUNDO FRAME ######################
         self.frame2 = Frame(bd=10, width='300', height='450', bg=self.color_base)
         self.frame2.pack(side='left')
-        self.lblOperaciones = Label(self.frame2, text='Seleccinar\nOperación', font=('Open Sans', 12), fg=self.color_fuente, bg=self.color_base)
-        self.lblOperaciones.place(x=100,y=0)
+        self.lblOperaciones = Label(self.frame2, text='Seleccinar Operación', font=('Open Sans', 12), fg=self.color_fuente, bg=self.color_base)
+        self.lblOperaciones.place(x=80,y=0)
         
         self.img = Image.open('./math/png/020-plus.png')
         self.img = self.img.resize((50,50), Image.ANTIALIAS)
         self.img = ImageTk.PhotoImage(self.img)
         self.btnSuma = Button(self.frame2, image=self.img, text='suma', bg=self.color_base)
-        self.btnSuma.place(x=10,y=70)
+        self.btnSuma.place(x=10,y=40)
         self.lblSuma = Label(self.frame2, text='Suma', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblSuma.place(x=17,y=128)
+        self.lblSuma.place(x=17,y=98)
         
         self.img1 = Image.open('./math/png/015-minus.png')
         self.img1 = self.img1.resize((50,50), Image.ANTIALIAS)
         self.img1 = ImageTk.PhotoImage(self.img1)
         self.btnResta = Button(self.frame2, image=self.img1, text='resta', bg=self.color_base)
-        self.btnResta.place(x=110,y=70)
+        self.btnResta.place(x=110,y=40)
         self.lblResta = Label(self.frame2, text='Resta', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblResta.place(x=118,y=128)
+        self.lblResta.place(x=118,y=98)
         
         self.img2 = Image.open('./math/png/017-multiply.png')
         self.img2 = self.img2.resize((50,50), Image.ANTIALIAS)
         self.img2 = ImageTk.PhotoImage(self.img2)
         self.btnAmpl = Button(self.frame2, image=self.img2, text='amplificacion', bg=self.color_base)
-        self.btnAmpl.place(x=210,y=70)
+        self.btnAmpl.place(x=210,y=40)
         self.lblAmpl = Label(self.frame2, text='Amplificación', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblAmpl.place(x=195,y=128)
+        self.lblAmpl.place(x=195,y=98)
         
         self.img3 = Image.open('./math/png/007-divided.png')
         self.img3 = self.img3.resize((50,50), Image.ANTIALIAS)
         self.img3 = ImageTk.PhotoImage(self.img3)
         self.btnAten = Button(self.frame2, image=self.img3, text='atenuacion', bg=self.color_base)
-        self.btnAten.place(x=10,y=170)
+        self.btnAten.place(x=10,y=140)
         self.lblAten = Label(self.frame2, text='Atenuación', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblAten.place(x=0,y=228)
+        self.lblAten.place(x=0,y=198)
         
         self.img4 = Image.open('./math_2/png/048-hyperbole.png')
         self.img4 = self.img4.resize((50,50), Image.ANTIALIAS)
         self.img4 = ImageTk.PhotoImage(self.img4)
         self.btnReflejo = Button(self.frame2, image=self.img4, text='reflejo', bg=self.color_base)
-        self.btnReflejo.place(x=110,y=170)
+        self.btnReflejo.place(x=110,y=140)
         self.lblReflejo = Label(self.frame2, text='Reflejo', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblReflejo.place(x=115,y=228)
+        self.lblReflejo.place(x=115,y=198)
         
         self.img5 = Image.open('./math_2/png/013-line segment.png')
         self.img5 = self.img5.resize((50,50), Image.ANTIALIAS)
         self.img5 = ImageTk.PhotoImage(self.img5)
         self.btnDesp = Button(self.frame2, image=self.img5, text='desplazamiento', bg=self.color_base)
-        self.btnDesp.place(x=210,y=170)
+        self.btnDesp.place(x=210,y=140)
         self.lblDesp = Label(self.frame2, text='Desplazamiento', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblDesp.place(x=190,y=228)
+        self.lblDesp.place(x=190,y=198)
         
         self.img6 = Image.open('./math_2/png/050-graphic.png')
         self.img6 = self.img6.resize((50,50), Image.ANTIALIAS)
         self.img6 = ImageTk.PhotoImage(self.img6)
         self.btnDiez = Button(self.frame2, image=self.img6, text='diezmacion', bg=self.color_base)
-        self.btnDiez.place(x=10,y=270)
+        self.btnDiez.place(x=10,y=240)
         self.lblDiez = Label(self.frame2, text='Diezmación', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblDiez.place(x=0,y=328)
+        self.lblDiez.place(x=0,y=298)
         
         self.img7 = Image.open('./math_2/png/049-graphic.png')
         self.img7 = self.img7.resize((50,50), Image.ANTIALIAS)
         self.img7 = ImageTk.PhotoImage(self.img7)
         self.btnInter = Button(self.frame2, image=self.img7, text='interpolacion', bg=self.color_base)
-        self.btnInter.place(x=110,y=270)
+        self.btnInter.place(x=110,y=240)
         self.lblInter = Label(self.frame2, text='Interpolación', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblInter.place(x=95,y=328)
+        self.lblInter.place(x=95,y=298)
         
         self.img8 = Image.open('./math_2/png/002-cosine.png')
         self.img8 = self.img8.resize((50,50), Image.ANTIALIAS)
         self.img8 = ImageTk.PhotoImage(self.img8)
         self.btnConv = Button(self.frame2, image=self.img8, text='convolucion', bg=self.color_base)
-        self.btnConv.place(x=210,y=270)
+        self.btnConv.place(x=210,y=240)
         self.lblConv = Label(self.frame2, text='Convolución', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        self.lblConv.place(x=196,y=328)
+        self.lblConv.place(x=196,y=298)
+        
+        self.lblSerie1 = Label(self.frame2, text='Serie 1', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
+        self.lblSerie1.place(x=0,y=340)
+        self.serie1 = Entry(self.frame2, width = 20)
+        self.serie1.place(x=60,y=340)
+        
+        self.lblSerie2 = Label(self.frame2, text='Serie 2', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
+        self.lblSerie2.place(x=0,y=360)
+        self.serie2lblSerie2 = Entry(self.frame2, width = 20)
+        self.serie2lblSerie2.place(x=60,y=360)
         
         ###################### TERCER FRAME ######################
         self.frame3 = Frame(bd=10, width='600', height='450', bg=self.color_base)
