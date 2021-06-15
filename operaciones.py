@@ -40,6 +40,7 @@ def Desplazamiento(serie, k):
     return serie
 
 def Amplifica(serie, factor):
+<<<<<<< HEAD
     expande = np.dot(serie, factor)
     return expande
 
@@ -47,6 +48,15 @@ def Atenua(serie, factor):
     comprime = np.dot(serie, 1/factor)
     return comprime
 
+=======
+    for s in serie:
+        s = s*factor
+    return serie
+def Atenua(serie, factor):
+    for s in serie:
+        s = s*(1/factor)
+    return serie
+>>>>>>> f8f701718e6219da2adee55ecdb058529cacee91
 def reflexion(serie):
     res = serie[::-1]
     return res
@@ -58,17 +68,18 @@ def Diezmacion(serie, k):
 
 def Interpolacion(serie,tipo):
     y = np.arange(0,len(serie))
-    res = interp1d(serie, y)
-    print(res)
+    res = interp1d(serie, y, kind = tipo)
+    
     return res
 
 def convolucion(serie1, serie2):
     res = np.convolve(serie1,serie2,mode="same")
     return res
 
-z=[1,2,1,2,1,2]
+z = [1,2,1,2,1,2]
 x = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2]
-h = [0.25, 4, 3, 1, 0, 2] 
+h = [0.25, 4, 3, 1, 0, 2]
+
 print("Original",x)
 #print("La suma es",Suma(z,2)) #Falta
 #print("La Resta es",Resta(z,2)) #Falta
