@@ -315,22 +315,6 @@ class GUI:
         self.lblAbrir = Label(self.frame1, text='Abrir archivo', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
         self.lblAbrir.place(x=40,y=115)
         
-        # self.img_file1 = Image.open('./file_n_folder/png/010-add-file.png')
-        # self.img_file1 = self.img_file1.resize((50,50), Image.ANTIALIAS)
-        # self.img_file1 = ImageTk.PhotoImage(self.img_file1)
-        # self.btnFile1 = Button(self.frame1, image=self.img_file1, text='Abrir', bg=self.color_base)
-        # self.btnFile1.place(x=155,y=55)
-        # self.lblEscribir = Label(self.frame1, text='Escribir señal', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        # self.lblEscribir.place(x=140,y=115)
-        
-        # self.img_file2 = Image.open('./file_n_folder/png/010-add-file.png')
-        # self.img_file2 = self.img_file2.resize((50,50), Image.ANTIALIAS)
-        # self.img_file2 = ImageTk.PhotoImage(self.img_file2)
-        # self.btnFile2 = Button(self.frame1, image=self.img_file2, text='Abrir', bg=self.color_base)
-        # self.btnFile2.place(x=255,y=55)
-        # self.lblLeer = Label(self.frame1, text='Leer señal escrita', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
-        # self.lblLeer.place(x=240,y=115)
-        
         self.lblSerie1 = Label(self.frame1, text='Serie 1', font=('Open Sans', 10), fg=self.color_fuente, bg=self.color_base)
         self.lblSerie1.place(x=200,y=45)
         self.serie1 = Entry(self.frame1, width = 30)
