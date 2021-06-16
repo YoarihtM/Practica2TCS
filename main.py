@@ -41,6 +41,83 @@ class GUI:
         self.canvas_grafica.get_tk_widget().pack(side=RIGHT, fill=BOTH)
         self.canvas_grafica.draw()
     
+    def Suma (serie1, p1, serie2, p2):
+        len_inter_s1 = len(serie1[:p1])
+        len_inter_s2 = len(serie2[:p2])
+        if len_inter_s1<=len_inter_s2:
+            print('el mayor numero entre', p1, 'y', p2, 'es ', p2)
+            x = p2-p1
+            for y in range(0,x):
+                serie1.insert(0,0)
+            print(serie1)
+            print(serie2)
+        else:   
+            print('el mayor numero entre', p1, 'y', p2, 'es ', p1)
+            x = p1-p2
+            for y in range(0,x):
+                serie2.insert(0,0)
+            print(serie1)
+            print(serie2)
+        
+        len1 = len(serie1[p1:])
+        len2 = len(serie2[p1:])
+        print(len1)
+        print(len2)
+        if len1<=len2:
+            x = len2-len1
+            for y in range(0,x):
+                serie1.insert(len(serie1),0)
+            print(serie1)
+            print(serie2)
+        else:   
+            x = len1-len2
+            for y in range(0,x):
+                serie2.insert(len(serie2),0)
+            print(serie1)
+            print(serie2)
+        
+        res = np.asarray(serie1) + np.asarray(serie2)
+        print(res)
+        return res
+    
+    def Resta (serie1, p1, serie2, p2):
+        len_inter_s1 = len(serie1[:p1])
+        len_inter_s2 = len(serie2[:p2])
+        if len_inter_s1<=len_inter_s2:
+            print('el mayor numero entre', p1, 'y', p2, 'es ', p2)
+            x = p2-p1
+            for y in range(0,x):
+                serie1.insert(0,0)
+            print(serie1)
+            print(serie2)
+        else:   
+            print('el mayor numero entre', p1, 'y', p2, 'es ', p1)
+            x = p1-p2
+            for y in range(0,x):
+                serie2.insert(0,0)
+            print(serie1)
+            print(serie2)
+        
+        len1 = len(serie1[p1:])
+        len2 = len(serie2[p1:])
+        print(len1)
+        print(len2)
+        if len1<=len2:
+            x = len2-len1
+            for y in range(0,x):
+                serie1.insert(len(serie1),0)
+            print(serie1)
+            print(serie2)
+        else:   
+            x = len1-len2
+            for y in range(0,x):
+                serie2.insert(len(serie2),0)
+            print(serie1)
+            print(serie2)
+        
+        res = np.asarray(serie1) - np.asarray(serie2)
+        print(res)
+
     def Desplazamiento(self, serie, k):
         l_serie1 = serie.split(', ')
         num_serie1 = []
