@@ -89,7 +89,7 @@ def convolucion(serie1, serie2):
     return res
 
 z = [1,2,1,2,1,2]
-x = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2]
+x = [   ]
 h = [0.25, 4, 3, 1, 0, 2]
 
 print("Original",x)
@@ -99,16 +99,16 @@ print("Original",x)
 #print("El reflejo de x es ", reflexion(x))
 # print("La Amplificacion es",Amplifica(x,2)) #Falta
 # print("La atenuacion es",Atenua(x,2)) #Son los que faltan
-<<<<<<< Updated upstream
+# <<<<<<< Updated upstream
 print("La Diezmacion es",Diezmacion(x,2))
-print("La interpolacion es", Interpolacion(x,"linear"))
+print("La interpolacion es", Interpolacion(x, 2,"linear"))
 print("La convolucion es ", convolucion(x,h))
 plt.plot(convolucion(x,h))
-=======
+# =======
 #print("La Diezmacion es",Diezmacion(x,2))
 #print("La interpolacion es ",Interpolacion(x,10,"zeros"))
 #print("La convolucion es ", convolucion(x,h))
->>>>>>> Stashed changes
+# >>>>>>> Stashed changes
 # INGRESO - tiempo [a,b)
 a = -8
 b = 8
