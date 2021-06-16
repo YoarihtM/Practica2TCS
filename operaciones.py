@@ -5,17 +5,44 @@ import matplotlib.pyplot as plt
 #este es un comentario
 def Suma (serie1, p1, serie2, p2):
     
-    len_total_s1 = len(serie1)
-    len_total_s2 = len(serie2)
     len_inter_s1 = len(serie1[:p1])
-    len_inter_s2 = len(serie2[p2:])
+    len_inter_s2 = len(serie2[:p2])
+    if len_inter_s1<=len_inter_s2:
+        print('el mayor numero entre', p1, 'y', p2, 'es ', p2)
+        x = p2-p1
+        for y in range(0,x):
+            serie1.insert(0,0)
+        print(serie1)
+        print(serie2)
+    else:   
+        print('el mayor numero entre', p1, 'y', p2, 'es ', p1)
+        x = p1-p2
+        for y in range(0,x):
+            serie2.insert(0,0)
+        print(serie1)
+        print(serie2)
     
-    print('tamaño de serie1 hasta su interseccion: ', len_inter_s1)
-    print('tamaño de serie2 hasta su interseccion: ', len_inter_s2)
+    len1 = len(serie1[p1:])
+    len2 = len(serie2[p1:])
+    print(len1)
+    print(len2)
+    if len1<=len2:
+        x = len2-len1
+        for y in range(0,x):
+            serie1.insert(len(serie1),0)
+        print(serie1)
+        print(serie2)
+    else:   
+        x = len1-len2
+        for y in range(0,x):
+            serie2.insert(len(serie2),0)
+        print(serie1)
+        print(serie2)
     
-    tam_total = len_inter_s1 + len_inter_s2
+    res = np.asarray(serie1) + np.asarray(serie2)
+    print(res)
     
-    print('tamaño de la nueva serie: ', tam_total)
+    
 
 def Resta (serie, factor):
     ser1 = np.array(serie1)
@@ -89,21 +116,21 @@ def convolucion(serie1, serie2):
     return res
 
 z = [1,2,1,2,1,2]
-x = [   ]
+x = [-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2]
 h = [0.25, 4, 3, 1, 0, 2]
 
 print("Original",x)
-#print("La suma es",Suma(z,2)) #Falta
+print("La suma es",Suma(x,10,h,1)) #Falta
 #print("La Resta es",Resta(z,2)) #Falta
 #print("El desplazamiento es", Desplazamiento(x, -3))
 #print("El reflejo de x es ", reflexion(x))
 # print("La Amplificacion es",Amplifica(x,2)) #Falta
 # print("La atenuacion es",Atenua(x,2)) #Son los que faltan
 # <<<<<<< Updated upstream
-print("La Diezmacion es",Diezmacion(x,2))
-print("La interpolacion es", Interpolacion(x, 2,"linear"))
-print("La convolucion es ", convolucion(x,h))
-plt.plot(convolucion(x,h))
+#print("La Diezmacion es",Diezmacion(x,2))
+#print("La interpolacion es", Interpolacion(x, 2,"linear"))
+#print("La convolucion es ", convolucion(x,h))
+#plt.plot(convolucion(x,h))
 # =======
 #print("La Diezmacion es",Diezmacion(x,2))
 #print("La interpolacion es ",Interpolacion(x,10,"zeros"))
